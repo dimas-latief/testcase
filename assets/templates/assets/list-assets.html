@@ -5,7 +5,7 @@
 
 
   <ul class="collection with-header">
-    <li class="collection-header"><h6>Select for request</h6></li>
+    <li class="collection-header"><h6>Select an asset for requesting it</h6></li>
     {% for item in assets %}
       <li class="collection-item">
           <a href="/assets/details/{{item.id}}">
@@ -14,4 +14,7 @@
       </li>
     {% endfor %}
   </ul>
+
+  <a href="{% url 'index' %}" class="waves-effect waves-light btn"><i class="material-icons left">arrow_back</i>Back</a>
+
 {% endblock %}

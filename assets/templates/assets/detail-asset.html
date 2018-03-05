@@ -6,7 +6,7 @@
         <span class="card-title">{{asset.assets_name}}</span>
     </div>
     <div class="card-action">
-        <form action="{% url 'requestAssets' asset.id asset.id %}" class="col s12" method="POST">
+        <form action="{% url 'requestAssets' asset.id %}" class="col s12" method="POST">
             {% csrf_token %}
             <div class="row valign-wrapper">
                 <div class="input-field col s6">
@@ -21,4 +21,7 @@
         </form>
     </div>
 </div>
+
+<a href="{% url 'list' %}" class="waves-effect waves-light btn"><i class="material-icons left">arrow_back</i>Back</a>
+
 {% endblock %}

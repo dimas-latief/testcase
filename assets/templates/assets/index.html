@@ -7,13 +7,7 @@
 
 <a href="/assets/list-assets" class="waves-effect waves-light btn"><i class="material-icons left">list</i>List Asset</a>
 
-
-{% if user.profile.boss_id is none %}
-    <a href="/assets/list-assets" class="waves-effect waves-light btn"><i class="material-icons left">format_list_bulleted</i>Asset Request Approval</a>
-{% endif %}
-
-<a href="/assets/list-assets" class="waves-effect waves-light btn"><i class="material-icons left">add_box</i>Requesting Asset</a>
-
+<a href="{% url 'requestAssetsApproval' user.id %}" class="waves-effect waves-light btn"><i class="material-icons left">format_list_bulleted</i>Asset Request Approval</a>
 
 
 {% endblock %}
