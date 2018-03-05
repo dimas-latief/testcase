@@ -1,13 +1,21 @@
-{% extends 'assets/layout.html' %}
-
-{% block content %}
-<h3 class="center-align red lighten-3">{{title}}</h3>
-
-<h6>Welcome back, {{user.username}}</h6>
-
-<a href="/assets/list-assets" class="waves-effect waves-light btn"><i class="material-icons left">list</i>List Asset</a>
-
-<a href="{% url 'requestAssetsApproval' user.id %}" class="waves-effect waves-light btn"><i class="material-icons left">format_list_bulleted</i>Asset Request Approval</a>
-
+{% extends 'assets/layout.html' %} {% block content %}
+<ul class="collection">
+    <li class="collection-item">
+        <a href="/assets/list-assets" class="waves-effect waves-light btn">
+            <i class="material-icons left">work</i>List Asset</a>
+    </li>
+    <li class="collection-item">
+        <a href="{% url 'requestAssetsApproval' user.id %}" class="waves-effect waves-light btn">
+            <i class="material-icons left">format_list_bulleted</i>Asset Request Approval</a>
+    </li>
+    <li class="collection-item">
+        <a href="{% url 'reportingEmployee' %}" class="waves-effect waves-light btn">
+            <i class="material-icons left">assignment_ind</i>Employee Reporting</a>
+    </li>
+    <li class="collection-item">
+        <a href="{% url 'reportingDepartment' %}" class="waves-effect waves-light btn">
+            <i class="material-icons left">tv</i>Department Reporting</a>
+    </li>
+</ul>
 
 {% endblock %}

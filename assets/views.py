@@ -3,7 +3,7 @@ from django.views.decorators.http import require_POST
 
 from django.contrib.auth.models import User
 
-from .models import Assets, AssigningAsset
+from .models import Assets, AssigningAsset, Profile, Departments
 from .forms import AssetRequestForm
 
 from django.db.models import Q
@@ -88,3 +88,39 @@ def approvedRequestedAsset(request, assign_assets_id):
     assignAssets.save()
 
     return redirect('index')
+
+def reportingEmployee(request):
+    users = User.objects.exclude(pk=1)
+
+    for item in users:
+        item.totalSubordinates = Profile.objects.filter(boss_id=item.id).count()
+
+    context = {
+        'title': 'All Employee',
+        'users': users
+    }
+
+    return render(request, 'assets/reporting-employee.html', context)
+
+def reportingDepartment(request):
+    departments = Departments.objects.all()
+
+    for item in departments:
+        item.totalEmployee = Profile.objects.filter(department_id=item.id).count()
+        profiles = Profile.objects.filter(department_id=item.id).all()
+
+        totalAssets = 0
+        
+        for profile in profiles:
+            count = User.objects.get(pk=profile.user_id).requester_set.filter(status='Approved').count()
+            totalAssets = totalAssets + count
+            
+        item.totalAsset = totalAssets
+
+
+    context = {
+        'title': 'All Department',
+        'departments': departments
+    }
+
+    return render(request, 'assets/reporting-department.html', context)
