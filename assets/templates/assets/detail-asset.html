@@ -1,0 +1,24 @@
+{% extends 'assets/layout.html' %} {% block content %}
+<h3 class="center-align red lighten-3">{{title}}</h3>
+
+<div class="card">
+    <div class="card-content">
+        <span class="card-title">{{asset.assets_name}}</span>
+    </div>
+    <div class="card-action">
+        <form action="{% url 'requestAssets' asset.id asset.id %}" class="col s12" method="POST">
+            {% csrf_token %}
+            <div class="row valign-wrapper">
+                <div class="input-field col s6">
+                    {{form.quantity}}
+                </div>
+                <div class="col s6">
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

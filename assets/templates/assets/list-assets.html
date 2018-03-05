@@ -5,23 +5,13 @@
 
 
   <ul class="collection with-header">
-    <li class="collection-header"><h4>List Assets</h4></li>
+    <li class="collection-header"><h6>Select for request</h6></li>
     {% for item in assets %}
-    <form action="" method="post">
       <li class="collection-item">
-        <div class="row valign-wrapper">
-          <div class="col l4">
+          <a href="/assets/details/{{item.id}}">
             {{item.assets_name}}
-          </div>
-          <div class="input-field col l4">
-            <input placeholder="Request Quantity" id="first_name" type="number" class="validate" min="1">
-          </div>
-          <a href="#!" class="secondary-content col l4">
-            <i class="material-icons left">send</i>
           </a>
-        </div>
       </li>
-    </form>
     {% endfor %}
   </ul>
 {% endblock %}
