@@ -1,0 +1,27 @@
+{% extends 'registration/layout.html' %}
+
+{% block content %}
+<h3 class="center-align red lighten-3">LOGIN</h3>
+    {% if form.errors %}
+    <p>There's something wrong with your input</p>
+    {% endif %}
+
+    {% if next %}
+    <p>You can't access the page</p>
+    {% endif %}
+
+    <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+
+        <p>Username: {{form.username}} </p>
+        <p>Password: {{form.password}} </p>
+       
+       
+
+        <input type="submit" value="login">
+        <input type="hidden" name="next" value="{{ next }}">
+        
+    </form>
+
+
+{% endblock %}
