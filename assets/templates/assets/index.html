@@ -3,6 +3,17 @@
 {% block content %}
 <h3 class="center-align red lighten-3">{{title}}</h3>
 
+<h6>Welcome back, {{user.username}}</h6>
+
 <a href="/assets/list-assets" class="waves-effect waves-light btn"><i class="material-icons left">list</i>List Asset</a>
+
+
+{% if user.profile.boss_id is none %}
+    <a href="/assets/list-assets" class="waves-effect waves-light btn"><i class="material-icons left">format_list_bulleted</i>Asset Request Approval</a>
+{% endif %}
+
+<a href="/assets/list-assets" class="waves-effect waves-light btn"><i class="material-icons left">add_box</i>Requesting Asset</a>
+
+
 
 {% endblock %}
