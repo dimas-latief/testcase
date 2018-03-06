@@ -7,6 +7,7 @@ from .models import Assets, AssigningAsset, Profile, Departments
 from .forms import AssetRequestForm
 
 from django.db.models import Q
+from django.db.models import Sum
 
 # Create your views here.
 def index(request):
@@ -112,8 +113,10 @@ def reportingDepartment(request):
         totalAssets = 0
         
         for profile in profiles:
-            count = User.objects.get(pk=profile.user_id).requester_set.filter(status='Approved').count()
-            totalAssets = totalAssets + count
+            count = User.objects.get(pk=profile.user_id).requester_set.filter(status='Approved').aggregate(Sum('quantity'))#.count()
+            print(count['quantity__sum'])
+            if count['quantity__sum']:
+                totalAssets = totalAssets + count['quantity__sum']
             
         item.totalAsset = totalAssets
 
