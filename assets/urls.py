@@ -13,5 +13,8 @@ urlpatterns = [
 
     path('reportingEmployee/', views.reportingEmployee, name='reportingEmployee'),
     path('reportingDepartement/', views.reportingDepartment, name='reportingDepartment'),
+    path('listEmployee/', views.listEmployee, name='listEmployee'),
+
+    path('employeeTree/<user_id>', views.employeeTree, name='employeeTree'),
 
 ]

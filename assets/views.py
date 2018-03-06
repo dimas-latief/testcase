@@ -117,10 +117,58 @@ def reportingDepartment(request):
             
         item.totalAsset = totalAssets
 
-
     context = {
         'title': 'All Department',
         'departments': departments
     }
 
     return render(request, 'assets/reporting-department.html', context)
+
+def listEmployee(request):
+    profiles = Profile.objects.exclude(pk=1)
+
+    context = {
+        'title': 'List Employee',
+        'profiles': profiles
+    }
+
+    return render(request, 'assets/list-employee.html', context)
+
+def employeeTree(request, user_id):
+    target = Profile.objects.get(user_id=user_id)
+    kepala = None
+    
+    if target.boss_id:
+        kepala = Profile.objects.get(user_id=target.boss_id)
+
+    tracker = set()
+    condition = True
+    tree = {}
+    itungan = 0
+    tree[itungan] = []
+    tree[itungan].append(target.user.username)
+    while condition:
+        itungan += 1
+        tree[itungan] = []
+        if len(tracker) != 0:
+            target = tracker.pop()
+
+        perkumpulanAnak = cariAnak(target)
+        if not perkumpulanAnak:
+            condition = False
+        else:
+            for anak in perkumpulanAnak:
+                tree[itungan].append(anak.user.username)
+                tracker.add(anak)
+        
+    context = {
+        'title': 'Employee Tree',
+        'tree': tree,
+        'kepala': kepala
+    }
+
+    return render(request, 'assets/tree-employee.html', context)
+
+def cariAnak(target):
+    anak = Profile.objects.filter(boss_id=target.user_id)
+    return anak

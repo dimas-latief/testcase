@@ -1,0 +1,26 @@
+{% extends 'assets/layout.html' %} {% block content %}
+<h3 class="center-align red lighten-3">{{title}}</h3>
+
+<table>
+    <tbody>
+        {% if kepala %}
+        <tr>
+            <td>{{ kepala.user.username }}</td>
+        </tr>
+        {% endif %} 
+        {% for key, value in tree.items %}
+        <tr>
+            {% for result in value %}
+            <td>{{ result }}</td>
+            {% endfor %}
+        </tr>
+
+        {% endfor %}
+    </tbody>
+</table>
+
+
+<a href="{% url 'listEmployee' %}" class="waves-effect waves-light btn">
+    <i class="material-icons left">arrow_back</i>Back</a>
+
+{% endblock %}
